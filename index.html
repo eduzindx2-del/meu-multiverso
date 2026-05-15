@@ -1,124 +1,174 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+<body>
 
-import { useState } from 'react';
-import { Search, Menu, Settings, MessageSquare, Bot, X, Home } from 'lucide-react';
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-export default function App() {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [activeView, setActiveView] = useState('home');
+<!-- SIDEBAR -->
 
-  const renderContent = () => {
-    let content;
-    switch (activeView) {
-      case 'settings':
-        content = (
-          <div className="flex flex-col md:flex-row gap-8">
-            <aside className="w-full md:w-64 flex flex-col gap-2">
-              <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">Opções</h3>
-              {['Perfil', 'Conta', 'Privacidade', 'Aparência', 'Sobre'].map((item) => (
-                <button
-                  key={item}
-                  className="px-4 py-2 text-left rounded-md hover:bg-gray-800 transition-colors"
-                >
-                  {item}
-                </button>
-              ))}
-            </aside>
-            <div className="flex-1">
-              <h2 className="text-2xl font-bold mb-4">Configuração</h2>
-              <p className="text-slate-400">Selecione uma opção para visualizar as configurações detalhadas.</p>
-            </div>
-          </div>
-        );
-        break;
-      case 'chat':
-        content = <h2 className="text-2xl font-bold">Conversa com Bots</h2>;
-        break;
-      case 'bots':
-        content = <h2 className="text-2xl font-bold">Bots Criados: Nenhum até agora.</h2>;
-        break;
-      case 'home':
-      default:
-        content = (
-          <div className="flex flex-col gap-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
-              <input 
-                type="text" 
-                placeholder="Pesquisar universos..." 
-                className="w-full bg-gray-800 border border-gray-700 text-slate-100 rounded-full py-2 pl-10 pr-4 focus:outline-none focus:border-gray-500" 
-              />
-            </div>
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-              {['Romance', 'Amizades', 'Animes', 'Ficção Científica', 'Fantasia'].map(cat => (
-                <button key={cat} className="whitespace-nowrap px-4 py-1.5 bg-gray-700 text-slate-200 rounded-full text-sm hover:bg-gray-600 transition-colors">
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-        );
-        break;
-    }
+<div class="sidebar" id="sidebar">
 
-    if (activeView === 'bots') {
-      return (
-        <div className="border-2 border-dashed border-gray-700 p-8 rounded-lg min-h-[400px] flex flex-col justify-center items-center">
-          {content}
-        </div>
-      );
-    }
-    return content;
-  };
+<div class="sidebar-top">
+<h2>Solk IA</h2>
+<p>Seu universo inteligente</p>
+</div>
 
-  return (
-    <div className="min-h-screen bg-gray-950 text-slate-100 font-sans">
-      {/* Sidebar Overlay */}
-      {isSidebarOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40" onClick={() => setSidebarOpen(false)} />
-      )}
+<div class="menu-btn" onclick="showPage('home')">
+🏠 Home
+</div>
 
-      {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 w-64 bg-gray-900 border-r border-gray-800 z-50 p-6 flex flex-col gap-8 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold">Menu</h2>
-          <button onClick={() => setSidebarOpen(false)} className="p-2 rounded-full hover:bg-gray-800">
-            <X className="w-5 h-5 text-slate-400" />
-          </button>
-        </div>
-        <nav className="flex flex-col gap-2">
-          <button onClick={() => { setActiveView('home'); setSidebarOpen(false); }} className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors text-left">
-            <Home className="w-5 h-5" /> Página Inicial
-          </button>
-          <button onClick={() => { setActiveView('settings'); setSidebarOpen(false); }} className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors text-left">
-            <Settings className="w-5 h-5" /> Configuração
-          </button>
-          <button onClick={() => { setActiveView('chat'); setSidebarOpen(false); }} className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors text-left">
-            <MessageSquare className="w-5 h-5" /> Conversa com Bots
-          </button>
-          <button onClick={() => { setActiveView('bots'); setSidebarOpen(false); }} className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors text-left">
-            <Bot className="w-5 h-5" /> Bots Criados
-          </button>
-        </nav>
-      </div>
+<div class="menu-btn" onclick="showPage('chat')">
+💬 Conversas
+</div>
 
-      <header className="sticky top-0 bg-gray-900/90 backdrop-blur-md border-b border-gray-800 p-4 flex justify-between items-center z-10">
-        <h1 className="text-2xl font-bold tracking-tight">Solk IA</h1>
-        <div className="flex gap-4">
-          <button className="p-2 rounded-full hover:bg-gray-800">
-            <Search className="w-5 h-5 text-slate-400" />
-          </button>
-          <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-full hover:bg-gray-800">
-            <Menu className="w-5 h-5 text-slate-400" />
-          </button>
-        </div>
-      </header>
-      <main className="p-4 md:p-6">
-        {renderContent()}
-      </main>
-    </div>
-  );
+<div class="menu-btn" onclick="showPage('bots')">
+🤖 Bots
+</div>
+
+<div class="menu-btn" onclick="showPage('settings')">
+⚙️ Configurações
+</div>
+
+</div>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="logo">
+🤖 Solk IA
+</div>
+
+<div class="header-buttons">
+<button class="header-btn">🔍</button>
+<button class="header-btn" onclick="openSidebar()">☰</button>
+</div>
+
+</header>
+
+<!-- HOME -->
+
+<div class="page active" id="home">
+
+<div class="hero">
+
+<h1>Explore possibilidades infinitas.</h1>
+
+<p>
+Crie bots, converse com inteligências artificiais
+e construa seus próprios universos.
+</p>
+
+<div class="search-box">
+<input type="text" placeholder="Pesquisar...">
+</div>
+
+</div>
+
+<div class="quick-grid">
+
+<div class="quick-card">
+<h3>💬 Conversas</h3>
+<p>Continue chats ativos.</p>
+</div>
+
+<div class="quick-card">
+<h3>🤖 Bots</h3>
+<p>Crie personalidades únicas.</p>
+</div>
+
+<div class="quick-card">
+<h3>⚡ Explorar</h3>
+<p>Descubra novas ideias.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- CHAT -->
+
+<div class="page" id="chat">
+
+<div class="section">
+<h1>💬 Conversas</h1>
+
+<div class="empty-box">
+Nenhuma conversa iniciada ainda.
+</div>
+
+</div>
+
+</div>
+
+<!-- BOTS -->
+
+<div class="page" id="bots">
+
+<div class="section">
+<h1>🤖 Bots</h1>
+
+<div class="empty-box">
+Você ainda não criou nenhum bot.
+</div>
+
+</div>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div class="page" id="settings">
+
+<div class="section">
+<h1>⚙️ Configurações</h1>
+
+<div class="settings-grid">
+
+<div class="setting-card">
+Perfil
+</div>
+
+<div class="setting-card">
+Conta
+</div>
+
+<div class="setting-card">
+Privacidade
+</div>
+
+<div class="setting-card">
+Tema
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function openSidebar(){
+document.getElementById("sidebar").classList.add("active");
+document.getElementById("overlay").classList.add("active");
 }
+
+function closeSidebar(){
+document.getElementById("sidebar").classList.remove("active");
+document.getElementById("overlay").classList.remove("active");
+}
+
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
+
+document.getElementById(page).classList.add("active");
+
+closeSidebar();
+
+}
+
+</script>
+
+</body>
