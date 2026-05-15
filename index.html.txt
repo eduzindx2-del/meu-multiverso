@@ -3,21 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multiverso</title>
+<title>Multiverso de Personagens</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:#0f0f0f;
+background:#000;
 color:white;
 }
 
 header{
-text-align:center;
 padding:20px;
-font-size:22px;
-border-bottom:1px solid #333;
+border-bottom:1px solid #222;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+h1{
+font-size:24px;
+margin:0;
+}
+
+button{
+background:#111;
+color:white;
+border:1px solid #333;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
 }
 
 .grid{
@@ -28,12 +43,13 @@ padding:20px;
 }
 
 .card{
-background:#1c1c1c;
-padding:15px;
-border-radius:10px;
+background:#111;
+border:1px solid #222;
+border-radius:12px;
+overflow:hidden;
 cursor:pointer;
-border:1px solid #333;
 transition:0.2s;
+text-align:center;
 }
 
 .card:hover{
@@ -41,15 +57,56 @@ transform:scale(1.05);
 border-color:white;
 }
 
-.hidden{display:none;}
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
 
-button{
-margin:20px;
+.card p{
 padding:10px;
-background:#222;
+margin:0;
+}
+
+#sidebar{
+position:fixed;
+left:-260px;
+top:0;
+width:260px;
+height:100%;
+background:#0b0b0b;
+border-right:1px solid #222;
+padding:20px;
+transition:0.3s;
+}
+
+#sidebar.open{
+left:0;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+}
+
+.overlay.show{
+display:block;
+}
+
+.search{
+width:100%;
+padding:10px;
+margin:20px;
+background:#111;
+border:1px solid #222;
 color:white;
-border:1px solid #333;
-cursor:pointer;
+border-radius:8px;
+box-sizing:border-box;
 }
 </style>
 
@@ -57,36 +114,67 @@ cursor:pointer;
 
 <body>
 
-<header>🌌 Multiverso de Personagens</header>
-
-<div id="home" class="grid">
-
-<div class="card" onclick="openU('Neon Rift')">Neon Rift</div>
-<div class="card" onclick="openU('Abyss Academy')">Abyss Academy</div>
-<div class="card" onclick="openU('Voidlands')">Voidlands</div>
-<div class="card" onclick="openU('Dream Protocol')">Dream Protocol</div>
-<div class="card" onclick="openU('Sky Colony')">Sky Colony</div>
-<div class="card" onclick="openU('Paper World')">Paper World</div>
-
+<div id="sidebar">
+<h3>Conversas & Bots</h3>
+<p>• Conversa 1</p>
+<p>• Bot Criador</p>
+<button onclick="toggleSidebar()">Fechar</button>
 </div>
 
-<div id="page" class="hidden">
-<button onclick="back()">⬅ Voltar</button>
-<h2 id="title"></h2>
-<p>Personagens fictícios deste universo.</p>
+<div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+<header>
+<h1>🌌 Multiverso</h1>
+<button onclick="toggleSidebar()">Menu</button>
+</header>
+
+<input class="search" placeholder="Buscar universos...">
+
+<div class="grid">
+
+<div class="card" onclick="openUniverse('Nebulosa X')">
+<img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564">
+<p>Nebulosa X</p>
+</div>
+
+<div class="card" onclick="openUniverse('Galáxia Alpha')">
+<img src="https://images.unsplash.com/photo-1506318137071-a8e063b4aec0">
+<p>Galáxia Alpha</p>
+</div>
+
+<div class="card" onclick="openUniverse('Buraco Negro')">
+<img src="https://images.unsplash.com/photo-1543722530-d2c3401d51b0">
+<p>Buraco Negro</p>
+</div>
+
+<div class="card" onclick="openUniverse('Estrela Dourada')">
+<img src="https://images.unsplash.com/photo-1534723328310-58413158c564">
+<p>Estrela Dourada</p>
+</div>
+
+<div class="card" onclick="openUniverse('Planeta Azul')">
+<img src="https://images.unsplash.com/photo-1614728853683-12d0979bf790">
+<p>Planeta Azul</p>
+</div>
+
+<div class="card" onclick="openUniverse('Vórtice Vermelho')">
+<img src="https://images.unsplash.com/photo-1506443432602-ac2f00f5ffe9">
+<p>Vórtice Vermelho</p>
+</div>
+
 </div>
 
 <script>
-function openU(name){
-document.getElementById("home").classList.add("hidden");
-document.getElementById("page").classList.remove("hidden");
-document.getElementById("title").innerText = name;
+
+function toggleSidebar(){
+document.getElementById("sidebar").classList.toggle("open");
+document.getElementById("overlay").classList.toggle("show");
 }
 
-function back(){
-document.getElementById("home").classList.remove("hidden");
-document.getElementById("page").classList.add("hidden");
+function openUniverse(name){
+alert("Entrou no universo: " + name);
 }
+
 </script>
 
 </body>
