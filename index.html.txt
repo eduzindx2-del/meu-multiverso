@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiverso</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#0f0f0f;
+color:white;
+}
+
+header{
+text-align:center;
+padding:20px;
+font-size:22px;
+border-bottom:1px solid #333;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:#1c1c1c;
+padding:15px;
+border-radius:10px;
+cursor:pointer;
+border:1px solid #333;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.05);
+border-color:white;
+}
+
+.hidden{display:none;}
+
+button{
+margin:20px;
+padding:10px;
+background:#222;
+color:white;
+border:1px solid #333;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>🌌 Multiverso de Personagens</header>
+
+<div id="home" class="grid">
+
+<div class="card" onclick="openU('Neon Rift')">Neon Rift</div>
+<div class="card" onclick="openU('Abyss Academy')">Abyss Academy</div>
+<div class="card" onclick="openU('Voidlands')">Voidlands</div>
+<div class="card" onclick="openU('Dream Protocol')">Dream Protocol</div>
+<div class="card" onclick="openU('Sky Colony')">Sky Colony</div>
+<div class="card" onclick="openU('Paper World')">Paper World</div>
+
+</div>
+
+<div id="page" class="hidden">
+<button onclick="back()">⬅ Voltar</button>
+<h2 id="title"></h2>
+<p>Personagens fictícios deste universo.</p>
+</div>
+
+<script>
+function openU(name){
+document.getElementById("home").classList.add("hidden");
+document.getElementById("page").classList.remove("hidden");
+document.getElementById("title").innerText = name;
+}
+
+function back(){
+document.getElementById("home").classList.remove("hidden");
+document.getElementById("page").classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
