@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiverso</title>
+
+<style>
+body {
+margin: 0;
+font-family: Arial;
+background: #000;
+color: white;
+}
+
+header {
+padding: 20px;
+text-align: center;
+font-size: 22px;
+border-bottom: 1px solid #222;
+}
+
+.grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+padding: 20px;
+}
+
+.card {
+background: #111;
+border: 1px solid #222;
+border-radius: 12px;
+padding: 20px;
+text-align: center;
+cursor: pointer;
+transition: 0.2s;
+}
+
+.card:hover {
+transform: scale(1.05);
+border-color: white;
+}
+
+#page {
+display: none;
+padding: 20px;
+}
+
+button {
+margin-bottom: 20px;
+padding: 10px;
+background: #111;
+color: white;
+border: 1px solid #333;
+cursor: pointer;
+border-radius: 8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>🌌 Multiverso de Personagens</header>
+
+<div id="home" class="grid">
+<div class="card" onclick="openU('Nebulosa X')">Nebulosa X</div>
+<div class="card" onclick="openU('Galáxia Alpha')">Galáxia Alpha</div>
+<div class="card" onclick="openU('Buraco Negro')">Buraco Negro</div>
+<div class="card" onclick="openU('Estrela Dourada')">Estrela Dourada</div>
+<div class="card" onclick="openU('Planeta Azul')">Planeta Azul</div>
+<div class="card" onclick="openU('Vórtice Vermelho')">Vórtice Vermelho</div>
+</div>
+
+<div id="page">
+<button onclick="back()">⬅ Voltar</button>
+<h2 id="title"></h2>
+<p>Universo selecionado com sucesso.</p>
+</div>
+
+<script>
+function openU(name){
+document.getElementById("home").style.display = "none";
+document.getElementById("page").style.display = "block";
+document.getElementById("title").innerText = name;
+}
+
+function back(){
+document.getElementById("home").style.display = "grid";
+document.getElementById("page").style.display = "none";
+}
+</script>
+
+</body>
+</html>
