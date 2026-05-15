@@ -6,6 +6,7 @@
 <title>Solk IA</title>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial;
@@ -14,12 +15,17 @@ color:white;
 }
 
 /* HEADER */
+
 header{
-padding:20px;
-border-bottom:1px solid #222;
 display:flex;
 justify-content:space-between;
 align-items:center;
+padding:20px;
+border-bottom:1px solid #222;
+background:#111;
+position:sticky;
+top:0;
+z-index:10;
 }
 
 .logo{
@@ -27,12 +33,73 @@ font-size:22px;
 font-weight:bold;
 }
 
-.sub{
-font-size:12px;
-color:#777;
+.header-buttons{
+display:flex;
+gap:10px;
+}
+
+.header-btn{
+width:40px;
+height:40px;
+border-radius:10px;
+border:1px solid #222;
+background:#1a1a1a;
+color:white;
+cursor:pointer;
+transition:0.2s;
+}
+
+.header-btn:hover{
+background:#222;
+}
+
+/* SEARCH */
+
+.search{
+padding:20px;
+}
+
+.search input{
+width:100%;
+padding:12px;
+border-radius:12px;
+border:1px solid #222;
+background:#111;
+color:white;
+outline:none;
+}
+
+.search input:focus{
+border-color:#555;
+}
+
+/* CATEGORIES */
+
+.categories{
+display:flex;
+gap:10px;
+overflow:auto;
+padding:0 20px 20px 20px;
+}
+
+.categories button{
+padding:8px 14px;
+border:none;
+border-radius:20px;
+background:#1a1a1a;
+color:#ccc;
+cursor:pointer;
+white-space:nowrap;
+transition:0.2s;
+}
+
+.categories button:hover{
+background:#333;
+color:white;
 }
 
 /* GRID */
+
 .grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -41,88 +108,171 @@ padding:20px;
 }
 
 /* CARD */
+
 .card{
 background:#111;
 border:1px solid #222;
-border-radius:15px;
+border-radius:18px;
 overflow:hidden;
 cursor:pointer;
-transition:0.2s;
+transition:0.25s;
 }
 
 .card:hover{
-transform:scale(1.05);
-border-color:#fff;
+transform:scale(1.03);
+border-color:#555;
 }
 
 .card img{
 width:100%;
-height:140px;
+height:180px;
 object-fit:cover;
+display:block;
+}
+
+.card-content{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
 }
 
 .card h3{
-margin:10px;
-font-size:14px;
-font-weight:normal;
+margin:0;
+font-size:15px;
+}
+
+.favorite{
+font-size:18px;
+cursor:pointer;
 }
 
 /* RESPONSIVO */
-@media (max-width: 768px){
+
+@media (max-width:768px){
+
 .grid{
 grid-template-columns:repeat(2,1fr);
 }
+
 }
 
-@media (max-width: 480px){
+@media (max-width:480px){
+
 .grid{
 grid-template-columns:repeat(1,1fr);
 }
-}
-</style>
 
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
+
 <div class="logo">🤖 Solk IA</div>
-<div class="sub">Explorador de Universos</div>
+
+<div class="header-buttons">
+<button class="header-btn">🔍</button>
+<button class="header-btn">☰</button>
+</div>
+
 </header>
 
-<div class="grid">
+<div class="search">
+<input
+type="text"
+id="searchInput"
+placeholder="Pesquisar universos..."
+onkeyup="searchUniverses()"
+>
+</div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa">
+<div class="categories">
+<button>Romance</button>
+<button>Animes</button>
+<button>Ficção</button>
+<button>Fantasia</button>
+<button>Amizades</button>
+</div>
+
+<div class="grid" id="grid">
+
+<div class="card" data-name="Cosmos Alpha">
+<img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=500">
+<div class="card-content">
 <h3>Cosmos Alpha</h3>
+<div class="favorite">⭐</div>
+</div>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564">
+<div class="card" data-name="Nebula Core">
+<img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=500">
+<div class="card-content">
 <h3>Nebula Core</h3>
+<div class="favorite">⭐</div>
+</div>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bae0">
+<div class="card" data-name="Galaxy X">
+<img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bae0?q=80&w=500">
+<div class="card-content">
 <h3>Galaxy X</h3>
+<div class="favorite">⭐</div>
+</div>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986">
+<div class="card" data-name="Void Reach">
+<img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=500">
+<div class="card-content">
 <h3>Void Reach</h3>
+<div class="favorite">⭐</div>
+</div>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1543722530-d2c34013512b">
+<div class="card" data-name="Stellar Drift">
+<img src="https://images.unsplash.com/photo-1543722530-d2c34013512b?q=80&w=500">
+<div class="card-content">
 <h3>Stellar Drift</h3>
+<div class="favorite">⭐</div>
+</div>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa">
+<div class="card" data-name="Pulsar Gate">
+<img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=500">
+<div class="card-content">
 <h3>Pulsar Gate</h3>
+<div class="favorite">⭐</div>
+</div>
 </div>
 
 </div>
+
+<script>
+
+function searchUniverses(){
+
+let input = document.getElementById("searchInput").value.toLowerCase();
+
+let cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+
+let name = card.getAttribute("data-name").toLowerCase();
+
+if(name.includes(input)){
+card.style.display = "block";
+}else{
+card.style.display = "none";
+}
+
+});
+
+}
+
+</script>
 
 </body>
 </html>
